@@ -44,4 +44,10 @@ public class StudentController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @PostMapping
+    public ResponseEntity<Student> create(@RequestBody Student student) {
+        // In a real application, you would save the student to the database here
+        return ResponseEntity.ok(student);
+    }
+
 }
