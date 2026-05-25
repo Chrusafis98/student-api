@@ -47,7 +47,11 @@ public class StudentController {
     @PostMapping
     public ResponseEntity<Student> create(@RequestBody Student student) {
         // In a real application, you would save the student to the database here
-        return ResponseEntity.ok(student);
+        return (ResponseEntity<Student>)students.stream()
+                .filter(s -> s.getId().equals(student.getId()))
+                .findFirst()
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 }
